@@ -1,6 +1,7 @@
-import pygame
-import sys
 import random
+import sys
+
+import pygame
 from pygame.locals import *
 
 pygame.init()
@@ -70,17 +71,21 @@ def draw_text(surface, text, font, color, x, y, center=False):
     surface.blit(render, rect)
     return rect
 
+
 def play_sound(sound):
     if sound:
         sound.play()
+
 
 def play_music(music_file):
     if music_file:
         pygame.mixer.music.load(music_file)
         pygame.mixer.music.play(-1)
 
+
 def stop_music():
     pygame.mixer.music.stop()
+
 
 def draw_3d_button(surface, text, font, x, y, w, h, pressed=False):
     base_top_color = (200, 220, 255)
@@ -96,7 +101,8 @@ def draw_3d_button(surface, text, font, x, y, w, h, pressed=False):
     shadow_offset = 4
 
     # Shadow
-    pygame.draw.rect(surface, (50, 50, 50), (x + offset + shadow_offset, y + offset + shadow_offset, w, h), border_radius=10)
+    pygame.draw.rect(surface, (50, 50, 50), (x + offset + shadow_offset, y + offset + shadow_offset, w, h),
+                     border_radius=10)
 
     def interpolate_color(c1, c2, t):
         return (
@@ -120,6 +126,7 @@ def draw_3d_button(surface, text, font, x, y, w, h, pressed=False):
     pygame.draw.rect(surface, border_color, (x + offset, y + offset, w, h), 2, border_radius=10)
 
     draw_text(surface, text, font, BLACK, x + offset + w // 2, y + offset + h // 2, center=True)
+
 
 def generate_problem(problem_type, level):
     max_num = 20 + (level * 10)
@@ -154,6 +161,7 @@ def generate_problem(problem_type, level):
     random.shuffle(options)
 
     return question, correct_str, options
+
 
 # ---------------- New Button Class -------------------
 # Load the button image (do this somewhere after pygame.init())
@@ -270,7 +278,8 @@ class MathGame:
         self.generate_new_problem()
 
     def generate_new_problem(self):
-        self.current_question, self.current_answer, self.current_options = generate_problem(self.problem_type, self.level)
+        self.current_question, self.current_answer, self.current_options = generate_problem(self.problem_type,
+                                                                                            self.level)
         self.remaining_time = self.time_limit
         self.start_time = pygame.time.get_ticks()
         self.last_chosen_box = None
@@ -387,13 +396,14 @@ class MathGame:
         self.screen.blit(background_img, (0, 0))
 
         if self.state == STATE_MAIN_MENU:
-            draw_text(self.screen, "Math Dash", FONT_LARGE, BLACK, SCREEN_WIDTH // 2, 100, center=True)
+            draw_text(self.screen, "Math Master", FONT_LARGE, BLACK, SCREEN_WIDTH // 2, 100, center=True)
             self.start_button.draw(self.screen)
             self.options_button.draw(self.screen)
             self.quit_button.draw(self.screen)
 
         elif self.state == STATE_PROBLEM_TYPE:
-            draw_text(self.screen, "Выберите арифметический знак", FONT_LARGE, BLACK, SCREEN_WIDTH // 2, 100, center=True)
+            draw_text(self.screen, "Выберите арифметический знак", FONT_LARGE, BLACK, SCREEN_WIDTH // 2, 100,
+                      center=True)
             ops_positions = [(100, 250), (250, 250), (400, 250), (550, 250)]
 
             ops_symbols = ["+", "-", "×", "÷"]
@@ -434,6 +444,7 @@ class MathGame:
             draw_text(self.screen, "Нажмите ПРОБЕЛ для выхода", FONT_SMALL, BLACK, SCREEN_WIDTH // 2, 400, center=True)
 
         pygame.display.flip()
+
 
 if __name__ == "__main__":
     game = MathGame()
