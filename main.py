@@ -397,6 +397,7 @@ class MathGame:
 
         if self.state == STATE_MAIN_MENU:
             draw_text(self.screen, "Math Master", FONT_LARGE, BLACK, SCREEN_WIDTH // 2, 100, center=True)
+            draw_text(self.screen, "Ибрагимова Умида Зафаржановна", FONT_SMALL, BLACK, 380, 485, center=True)
             self.start_button.draw(self.screen)
             self.options_button.draw(self.screen)
             self.quit_button.draw(self.screen)
